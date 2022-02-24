@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class InputManager : MonoBehaviour
 {
 
@@ -30,7 +31,7 @@ public class InputManager : MonoBehaviour
         onFoot.Sprint.performed += ctx => motor.Sprint();
 
         //Crouch uses callback context when performed
-        onFoot.Crouch.performed += ctx => motor.Crouch();
+        onFoot.Crouch.performed += ctx => motor.Crouch();   
     }
 
     // Update is called once per frame

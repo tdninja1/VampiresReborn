@@ -40,12 +40,12 @@ public class PlayerInteract : MonoBehaviour
             if (hitInfo.collider.GetComponent<Interactable>() != null)
             {
                 //store hit info in temp variable
-                // Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                // playerUI.UpdateText(interactable.promptMessage);
-                // if (inputManager.OnFoot.Interact.triggered)
-                // {
-                //     interactable.BaseInteract();
-                // }
+                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                playerUI.UpdateText(interactable.promptMessage);
+                if (inputManager.OnFoot.Interact.trigger)
+                {
+                    interactable.BaseInteract();
+                }
                 
                 //debug / test
                 Debug.Log(hitInfo.collider.GetComponent<Interactable>().promptMessage);

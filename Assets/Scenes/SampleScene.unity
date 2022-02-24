@@ -1405,17 +1405,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_PointAction: {fileID: 4356704561268913334, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_MoveAction: {fileID: -7474210292998813466, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_SubmitAction: {fileID: -8459874402060490825, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_CancelAction: {fileID: 9133046171655964270, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_LeftClickAction: {fileID: -2844036322293524146, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_MiddleClickAction: {fileID: 4797426122297787565, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_RightClickAction: {fileID: -5028230924429683812, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_ScrollWheelAction: {fileID: 3964459594623785316, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_TrackedDevicePositionAction: {fileID: -3799611991994849248, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 4909242904453190994, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_PointAction: {fileID: 8555553894620052297, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_MoveAction: {fileID: 1003690585058802542, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_SubmitAction: {fileID: 3044163905207769319, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_CancelAction: {fileID: -5606194228528852252, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_LeftClickAction: {fileID: 3919979700639348735, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_MiddleClickAction: {fileID: -598169750625846552, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_RightClickAction: {fileID: 3435386226459785462, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_ScrollWheelAction: {fileID: 2752619524703360104, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_TrackedDevicePositionAction: {fileID: -5964377830913883852, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: -4132062320441966383, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
 --- !u!114 &1105957370
@@ -1828,6 +1828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   promptMessage: Use Keypad
+  door: {fileID: 0}
 --- !u!20 &2056807982 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 236389496362641898, guid: 4e63b06036df34342aec17d6d355abe6, type: 3}
