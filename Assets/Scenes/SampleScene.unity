@@ -385,6 +385,60 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301038573}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &307894590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 307894592}
+  - component: {fileID: 307894591}
+  m_Layer: 0
+  m_Name: Door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &307894591
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307894590}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 65de04a305f13874fb9a92a829d24a65, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!4 &307894592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307894590}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5450462, y: 1.1967522, z: -3.0313993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 891104097}
+  - {fileID: 1670195653}
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &309186858
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +633,7 @@ Transform:
   - {fileID: 1346949031}
   - {fileID: 933454853}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &401537711
 GameObject:
@@ -1171,12 +1225,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891104093}
   m_LocalRotation: {x: -0, y: -0.70710695, z: -0, w: 0.7071066}
-  m_LocalPosition: {x: 1.1200018, y: 1.1753569, z: -2.269999}
+  m_LocalPosition: {x: 1.665048, y: -0.021395326, z: 0.7614002}
   m_LocalScale: {x: 0.19999997, y: 5, z: 3.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 307894592}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &933454852
 GameObject:
@@ -1405,17 +1459,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_PointAction: {fileID: 8555553894620052297, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_MoveAction: {fileID: 1003690585058802542, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_SubmitAction: {fileID: 3044163905207769319, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_CancelAction: {fileID: -5606194228528852252, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_LeftClickAction: {fileID: 3919979700639348735, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_MiddleClickAction: {fileID: -598169750625846552, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_RightClickAction: {fileID: 3435386226459785462, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_ScrollWheelAction: {fileID: 2752619524703360104, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_TrackedDevicePositionAction: {fileID: -5964377830913883852, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: -4132062320441966383, guid: f3bbaede3cd5db947a7ccd336211df82, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_PointAction: {fileID: 4356704561268913334, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_MoveAction: {fileID: -7474210292998813466, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_SubmitAction: {fileID: -8459874402060490825, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_CancelAction: {fileID: 9133046171655964270, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_LeftClickAction: {fileID: -2844036322293524146, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_MiddleClickAction: {fileID: 4797426122297787565, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_RightClickAction: {fileID: -5028230924429683812, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_ScrollWheelAction: {fileID: 3964459594623785316, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_TrackedDevicePositionAction: {fileID: -3799611991994849248, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 4909242904453190994, guid: 5527b68a443ed504089d24cfd5f496f4, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
 --- !u!114 &1105957370
@@ -1446,7 +1500,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1346949030
 GameObject:
@@ -1710,12 +1764,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670195649}
   m_LocalRotation: {x: -0, y: -0.70710695, z: -0, w: 0.7071066}
-  m_LocalPosition: {x: -2.1299982, y: 1.1753569, z: -2.2700007}
+  m_LocalPosition: {x: -1.584952, y: -0.02139533, z: 0.7613986}
   m_LocalScale: {x: 0.19999997, y: 5, z: 3.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 307894592}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1833398325
 GameObject:
@@ -1813,7 +1867,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1833398330
 MonoBehaviour:
@@ -1828,7 +1882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   promptMessage: Use Keypad
-  door: {fileID: 0}
+  door: {fileID: 307894590}
 --- !u!20 &2056807982 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 236389496362641898, guid: 4e63b06036df34342aec17d6d355abe6, type: 3}
@@ -1929,7 +1983,7 @@ RectTransform:
   - {fileID: 789020876}
   - {fileID: 753020802}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
