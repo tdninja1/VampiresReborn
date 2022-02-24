@@ -41,7 +41,7 @@ public class PlayerInteract : MonoBehaviour
                 //store hit info in temp variable
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                 playerUI.UpdateText(interactable.promptMessage);
-                // if (inputManager.OnFoot.Interact.triggered)
+                if (inputManager.onFoot.Interact.triggered)
                 {
                     interactable.BaseInteract();
                 }
