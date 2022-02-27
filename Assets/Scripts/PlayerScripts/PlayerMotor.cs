@@ -26,6 +26,10 @@ public class PlayerMotor : MonoBehaviour
     //jump movement
     public float jumpHeight = 1.5f;
 
+    //fly movement
+    private bool startCooldown;
+    public int flyTimer = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +80,46 @@ public class PlayerMotor : MonoBehaviour
         // Debug.Log("Player Speed: " + speed);
         Debug.Log("Player Crouch: " + isCrouching);
     
+    }
+
+    public void Fly()
+    {
+        //set gravity to create a condition
+        gravity = 0.2f;
+
+        //player wants to set isGrounded to false since they want to Fly
+        if (gravity == 0.2f) {
+            //propel the player velocity
+            playerVelocity.y = 9f;
+            speed = 2f;
+        }
+
+        while (speed <= 2f) {
+            //create a timer - flyTimer set to 5 seconds ()
+            
+            //use timer object
+            for (int i = 1; i < 500000.0f; i++) {
+                // if (flyTimer.CompareTo(5f).equals(5f))
+                // {
+                    // float temp = 1f;
+                    startCooldown = true;
+                  
+
+                    //reset values
+                    if (startCooldown == true) {
+                        gravity = -9.8f;
+                        speed = 5f;
+                    
+                    }
+                    else {
+                        startCooldown = false;
+                    }
+                    
+                   
+
+                // }
+            }
+        }
     }
 
     public void Jump()
