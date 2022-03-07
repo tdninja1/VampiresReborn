@@ -10,10 +10,12 @@ public class InputManager : MonoBehaviour
     private PlayerInput playerInput;
     public PlayerInput.OnFootActions onFoot;
     public GameObject attackObject;
-    public PlayerBite playerBite;
 
     private PlayerMotor motor;
     private PlayerLook look;
+
+    private float isAttacking = 1;
+    private float notAttacking = 0;
     
 
     // Start is called before the first frame update
@@ -41,6 +43,8 @@ public class InputManager : MonoBehaviour
         onFoot.Fly.performed += ctx => motor.Fly(); 
 
         //Bite uses callback context when performed
+        onFoot.Bite.performed += ctx => motor.Bite();
+    
         // onFoot.Bite.performed += ctx => playerBite.Bite(); 
     }
 

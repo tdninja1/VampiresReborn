@@ -10,13 +10,15 @@ public class PlayerBite : MonoBehaviour
     void Start()
     {
        
-        // animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
+
+
 
     public void Bite()
     {
        
-        // animator.SetTrigger("Bite");
+        animator.SetTrigger("Bite");
         
     }
 }

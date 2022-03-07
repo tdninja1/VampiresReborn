@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
+    Animator animator;
     //player controller
     private CharacterController controller;
     //player
@@ -30,10 +31,19 @@ public class PlayerMotor : MonoBehaviour
     private bool startCooldown;
     public int flyTimer = 5;
 
+    //Bite attack movement
+    public GameObject sword;
+    public bool CanAttack = true;
+    public float AttackCooldown = 1.0f;
+
+    //SOUND
+    public AudioClip swordAttackSound;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -145,6 +155,30 @@ public class PlayerMotor : MonoBehaviour
             speed = 8;
         else
             speed = 5;
+    }
+
+    // public void Bite()
+    // {
+    //     Debug.Log("Player Bite");
+    //     animator.SetTrigger("Attack");
+        
+    // }
+
+    public void Bite()
+    {
+        CanAttack = false;
+
+        Animator anim = sword.GetComponent<Animator>();
+        anim.SetTrigger("Attack");
+        AudioSource ac = GetComponent<AudioSource>();
+        ac.PlayOneShot(swordAttackSound);
+        StartCoroutine(ResetAttackCooldown());
+    }
+
+    IEnumerator ResetAttackCooldown()
+    {
+        yield return new WaitForSeconds(AttackCooldown);
+        CanAttack = true;
     }
 
 }
