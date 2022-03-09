@@ -8,6 +8,9 @@ public class PlayerMotor : MonoBehaviour
     Animator animator;
     //player controller
     private CharacterController controller;
+    //input manager
+    private InputManager inputManager;
+
     //player
     private Vector3 playerVelocity;
     //speed check
@@ -34,7 +37,7 @@ public class PlayerMotor : MonoBehaviour
     //Bite attack movement
     public GameObject sword;
     public bool CanAttack = true;
-    public float AttackCooldown = 1.0f;
+    public float AttackCooldown = 4.0f;
 
     //SOUND
     public AudioClip swordAttackSound;
@@ -44,11 +47,23 @@ public class PlayerMotor : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        inputManager = GetComponent<InputManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //can bite?
+        if (inputManager.onFoot.Bite.triggered)
+        {
+            if (CanAttack != true) return;
+
+            else {
+                Bite();
+            }
+
+        }
+
         isGrounded = controller.isGrounded;
 
         //crouch check
