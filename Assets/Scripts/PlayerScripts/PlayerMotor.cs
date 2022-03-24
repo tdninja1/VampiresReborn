@@ -37,6 +37,7 @@ public class PlayerMotor : MonoBehaviour
     //Bite attack movement
     public GameObject sword;
     public bool CanAttack = true;
+    public bool isAttacking = false; //check if player is attacking
     public float AttackCooldown = 4.0f;
 
     //SOUND
@@ -181,6 +182,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void Bite()
     {
+        isAttacking = true;
         CanAttack = false;
 
         Animator anim = sword.GetComponent<Animator>();
@@ -192,8 +194,15 @@ public class PlayerMotor : MonoBehaviour
 
     IEnumerator ResetAttackCooldown()
     {
+        StartCoroutine(ResetAttackBool());
         yield return new WaitForSeconds(AttackCooldown);
         CanAttack = true;
+    }
+
+    IEnumerator ResetAttackBool()
+    {
+        yield return new WaitForSeconds(1.0f);
+        isAttacking = false;
     }
 
 }
