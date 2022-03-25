@@ -14,10 +14,6 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
 
-    private float isAttacking = 1;
-    private float notAttacking = 0;
-    
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -45,7 +41,6 @@ public class InputManager : MonoBehaviour
         //Bite uses callback context when performed
         onFoot.Bite.performed += ctx => motor.Bite();
     
-        // onFoot.Bite.performed += ctx => playerBite.Bite(); 
     }
 
     // Update is called once per frame
