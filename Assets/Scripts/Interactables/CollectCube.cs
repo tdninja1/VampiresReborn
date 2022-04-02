@@ -10,6 +10,7 @@ public class CollectCube : Interactable
     protected override void Interact()
     {
         Debug.Log("CollectCube Test" + cube);
+        ScoreManager.instance.UpdateScrollText();
         Destroy(cube);
         Instantiate(particle, transform.position, Quaternion.identity);
         

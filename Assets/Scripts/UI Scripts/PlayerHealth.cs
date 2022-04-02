@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,12 +13,23 @@ public class PlayerHealth : MonoBehaviour
     public Image frontHealthBar;
     public Image backHealthBar;
 
+    //counter for scrolls
+    public int counter = 0;
+    public string counterString;
+    public GameObject CollectCube;
+    public TextMeshProUGUI scrollCounterText;
+
     private InputManager inputManager;
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         inputManager = GetComponent<InputManager>();
+
+        //added for scrolls
+        counter = 0;
+        CollectCube = GetComponent<GameObject>();
+        scrollCounterText = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -25,6 +37,7 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth); //ensures value never goes above or below max and min
         UpdateHealthUI();
+        
         // if (Input.GetKeyDown(KeyCode.G)) - 
         //above is the new input system, use the old input system by using inputManager to handle inputs
         if (inputManager.onFoot.Debug.triggered)
@@ -37,6 +50,14 @@ public class PlayerHealth : MonoBehaviour
             RestoreHealth(Random.Range(5, 10));
         }
 
+        // if (inputManager.onFoot.Interact.triggered && CollectCube == null) {
+        //     UpdateScrollsUI();
+            
+        // }
+        if (CollectCube == null) {
+            scrollCounterText.SetText("Test");
+        }
+        
 
     }
 
@@ -69,6 +90,15 @@ public class PlayerHealth : MonoBehaviour
             percentComplete = percentComplete * percentComplete;
             frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthBar.fillAmount, percentComplete);
         }
+    }
+
+    public void UpdateScrollsUI()
+    {
+        Debug.Log(counter);
+
+       
+        
+
     }
 
     public void TakeDamage(float damage)
