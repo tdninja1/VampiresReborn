@@ -3,8 +3,17 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 namespace CandiceAIforGames.AI
 {
+    
     public class CandiceDefaultBehaviors
     {
+    
+        // Animator anim;
+        // GameObject ai;
+
+        // void Start()
+        // {
+        //     anim = ai.GetComponent<Animator>();
+        // }
 
         public static CandiceBehaviorStates ScanForObjects(CandiceBehaviorNode rootNode)
         {
@@ -191,8 +200,13 @@ namespace CandiceAIforGames.AI
         }
         public static CandiceBehaviorStates AttackMelee(CandiceBehaviorNode rootNode)
         {
+            Debug.Log("AttackMelee");
             CandiceAIController agent = rootNode.aiController;
             agent.AttackMelee();
+          //  anim.SetTrigger("attack");
+            
+         
+
             return CandiceBehaviorStates.SUCCESS;
         }
         public static CandiceBehaviorStates AttackRange(CandiceBehaviorNode rootNode)

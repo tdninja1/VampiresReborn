@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using CandiceAIforGames.AI;
+using CandiceAIforGames.AI.Pathfinding;
+
 public class PlayerHealth : MonoBehaviour
 {
     private float health;
@@ -20,6 +23,10 @@ public class PlayerHealth : MonoBehaviour
     public TextMeshProUGUI scrollCounterText;
 
     private InputManager inputManager;
+
+    public CandiceAIController agent;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +37,9 @@ public class PlayerHealth : MonoBehaviour
         counter = 0;
         CollectCube = GetComponent<GameObject>();
         scrollCounterText = GetComponent<TextMeshProUGUI>();
+     
+     
+        agent = GetComponent<CandiceAIController>();
     }
 
     // Update is called once per frame
@@ -54,9 +64,14 @@ public class PlayerHealth : MonoBehaviour
         //     UpdateScrollsUI();
             
         // }
-        if (CollectCube == null) {
-            scrollCounterText.SetText("Test");
-        }
+
+        // if (agent != null && agent.WithinAttackRange()) {
+        //     // ReceiveDamage(Random.Range(5, 10));
+        //     TakeDamage();
+        // }
+        
+       
+       
         
 
     }
@@ -106,6 +121,17 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         lerpTimer = 0f;
     }
+
+    // public void ReceiveDamage(float damage)
+    // {
+    //     health -= damage;
+    //     lerpTimer = 0f;
+
+    //     if (health <= 0)
+    //     {
+
+    //     }
+    // }
 
     public void RestoreHealth(float healAmount)
     {

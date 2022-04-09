@@ -120,7 +120,7 @@ namespace CandiceAIforGames.AI
         private float obstacleAvoidanceAOE = 0.5f;
         [SerializeField]
         private Vector3 lookPoint;
-
+ 
         /*
          * Movement Variables
          */
@@ -176,7 +176,7 @@ namespace CandiceAIforGames.AI
         [SerializeField]
         private float attackDamage = 3f;
         [SerializeField]
-        private float attacksPerSecond = 1f;
+        public float attacksPerSecond = 1f;
         [SerializeField]
         private float attackRange = 1f;
         [SerializeField]
@@ -193,7 +193,12 @@ namespace CandiceAIforGames.AI
         private bool isAttacking = false;
 
 
-
+        /*
+        * Animator and time of last attack
+        */
+        Animator anim;
+        private float timeOfLastAttack = 0f;
+        private bool isStopped;
 
 
         /*
@@ -275,6 +280,11 @@ namespace CandiceAIforGames.AI
                 CandiceAIManager.getInstance().RegisterAgent(gameObject, onRegistrationComplete);
             }
             col = GetComponent<Collider>();
+
+            //added animation
+            anim = GetComponent<Animator>();
+            //end animation
+
             //UnityEditor.Undo.RecordObject(this, "Description");
             combatModule = new CandiceModuleCombat(transform,onAttackComplete,"Agent" + AgentID + "-CandiceModuleCombat");
             movementModule = new CandiceModuleMovement("Agent" + AgentID + "-CandiceModuleMovement");
@@ -422,11 +432,18 @@ namespace CandiceAIforGames.AI
             {
                 //Play attack animation which will call the Damage() function
                 IsAttacking = true;
+                anim.SetTrigger("attack");
+                onAttackComplete();
+
+                ReceiveDamage(AttackDamage);
+
             }
             else if (!IsAttacking)
             {
                 IsAttacking = true;
+               
                 StartCoroutine(combatModule.DealTimedDamage(AttackSpeed, AttackDamage, AttackRange, DamageAngle, enemyTags,onAttackComplete));
+
             }
         }
         public void onAttackComplete()
