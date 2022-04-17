@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
     private InputManager inputManager;
 
     public CandiceAIController agent;
+    private RaycastHit rayHit;
 
     
     // Start is called before the first frame update
@@ -65,10 +67,13 @@ public class PlayerHealth : MonoBehaviour
             
         // }
 
-        // if (agent != null && agent.WithinAttackRange()) {
-        //     // ReceiveDamage(Random.Range(5, 10));
-        //     TakeDamage();
-        // }
+        if (agent != null && agent.WithinAttackRange()) {
+            // ReceiveDamage(Random.Range(5, 10));
+            TakeDamage(3);
+        }
+
+      
+
         
        
        

@@ -426,6 +426,8 @@ namespace CandiceAIforGames.AI
             }
         }
 
+        // PlayerHealth healthPlayer;
+
         public void AttackMelee()
         {
             if (hasAttackAnimation && !IsAttacking)
@@ -435,7 +437,8 @@ namespace CandiceAIforGames.AI
                 anim.SetTrigger("attack");
                 onAttackComplete();
 
-                ReceiveDamage(AttackDamage);
+                // ReceiveDamage(AttackDamage);
+                // healthPlayer.TakeDamage(AttackDamage);
 
             }
             else if (!IsAttacking)

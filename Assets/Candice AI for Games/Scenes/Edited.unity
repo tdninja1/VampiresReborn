@@ -1134,6 +1134,7 @@ MonoBehaviour:
   counterString: 
   CollectCube: {fileID: 0}
   scrollCounterText: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!114 &531011409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,7 +1515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 106.093994, y: 478.69714}
+  m_AnchoredPosition: {x: 106.093994, y: 401.4}
   m_SizeDelta: {x: 212.1786, y: 63.7724}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587623382
@@ -2108,7 +2109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 133.84, y: 481}
+  m_AnchoredPosition: {x: 133.84, y: 403.70285}
   m_SizeDelta: {x: 156.68, y: 27.7854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &762471380
@@ -2259,7 +2260,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 133.84, y: 481.00003}
+  m_AnchoredPosition: {x: 133.84, y: 403.70288}
   m_SizeDelta: {x: 156.68, y: 27.7854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &884567878
@@ -2335,7 +2336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 133.84, y: 480.27924}
+  m_AnchoredPosition: {x: 133.84, y: 402.9821}
   m_SizeDelta: {x: 156.68, y: 27.7854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &886088848
@@ -2913,6 +2914,7 @@ MonoBehaviour:
   counterString: 
   CollectCube: {fileID: 0}
   scrollCounterText: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!114 &1015122303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3029,6 +3031,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1015122309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015122296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd732ff76e36904da5c498be19d1b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1035658595
 GameObject:
   m_ObjectHideFlags: 0
