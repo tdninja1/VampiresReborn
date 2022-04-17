@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 using CandiceAIforGames.AI;
 using CandiceAIforGames.AI.Pathfinding;
@@ -27,6 +28,9 @@ public class PlayerHealth : MonoBehaviour
 
     public CandiceAIController agent;
     private RaycastHit rayHit;
+
+    //SOUND
+    public AudioClip loseSound;
 
     
     // Start is called before the first frame update
@@ -125,6 +129,12 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damage;
         lerpTimer = 0f;
+
+        if (health <= 0) { 
+            SceneManager.LoadScene(3); //lose scene
+            // AudioSource ac = GetComponent<AudioSource>();
+            // ac.PlayOneShot(winSound);
+        }
     }
 
     // public void ReceiveDamage(float damage)
