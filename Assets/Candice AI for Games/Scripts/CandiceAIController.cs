@@ -435,6 +435,9 @@ namespace CandiceAIforGames.AI
                 //Play attack animation which will call the Damage() function
                 IsAttacking = true;
                 anim.SetTrigger("attack");
+
+                gameObject.SendMessage("ReceiveDamage", attackDamage);
+
                 onAttackComplete();
 
                 // ReceiveDamage(AttackDamage);
@@ -541,9 +544,13 @@ namespace CandiceAIforGames.AI
 
             return isValid;
         }
+        PlayerHealth pH;
         public void ReceiveDamage(float damage)
         {
             HitPoints = combatModule.ReceiveDamage(damage, HitPoints);
+
+            
+            
         }
         public bool WithinAttackRange()
         {
