@@ -37,10 +37,11 @@ public class AttackCollision : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Enemy")
-        {
-            Debug.Log("Damaged enemy from collision");
-        }
+        // if (other.tag == "Player")
+        // {
+        //     Debug.Log("Damaged player from collision");
+        //     other.GetComponent<PlayerHealth>().ReceiveDamage(0.08f);
+        // }
 
 
     }

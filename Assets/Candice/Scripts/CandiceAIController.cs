@@ -201,6 +201,12 @@ namespace CandiceAIforGames.AI
         * Animator and time of last attack
         */
         Animator anim;
+
+        /*
+        * Cooldown
+        */
+        public float cooldown;
+        public float lastAttack;
         
 
 
@@ -444,6 +450,12 @@ namespace CandiceAIforGames.AI
             }
         }
 
+        IEnumerator AttackCoroutine()
+        {
+            yield return new WaitForSeconds(0.75f);
+            
+        }
+
         public void AttackMelee()
         {
             if (hasAttackAnimation && !IsAttacking)
@@ -454,12 +466,27 @@ namespace CandiceAIforGames.AI
                 anim.SetTrigger("attack");
 
                 //sends damage to player
-
-                //player.SendMessage("ReceiveDamage", attackDamage);
-                // if (attackCollision.OnTriggerEnter.ContainsTag("Enemy"))
-                // {
-                //     gameObject.SendMessage("ReceiveDamage", attackDamage);
+                // if (Time.time - lastAttack < cooldown) {
+                //     return;
                 // }
+                // lastAttack = Time.time;
+
+                // if (IsAttacking)
+                // {
+                //     player.SendMessage("ReceiveDamage", 0.08f);
+                // }
+                Collider other = player.GetComponent<Collider>();
+                
+
+                
+                if (other.tag == "Player" && anim.tag != "Death")
+                {
+                    Debug.Log("Damaged player from collision");
+                    
+                    other.GetComponent<PlayerHealth>().ReceiveDamage(0.0035f);
+
+                    //player.SendMessage("ReceiveDamage", 0.08f);
+                }
                 
 
                 

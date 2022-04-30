@@ -206,15 +206,11 @@ public class PlayerMotor : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && isAttacking == true)
         {
             Debug.Log("Damaged enemy");
             Animator enemyAnim = sword.GetComponent<Animator>();
             enemyAnim.SetTrigger("Death");
-
-
-
-            Destroy(other.gameObject, 1.25f);
             
         }
 

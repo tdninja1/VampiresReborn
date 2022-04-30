@@ -310,6 +310,8 @@ MonoBehaviour:
   projectileSpawnPos: {fileID: 0}
   hasAttackAnimation: 1
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!136 &10824215
 CapsuleCollider:
@@ -456,6 +458,8 @@ MonoBehaviour:
   projectileSpawnPos: {fileID: 0}
   hasAttackAnimation: 0
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!136 &29458154
 CapsuleCollider:
@@ -1177,6 +1181,8 @@ MonoBehaviour:
   projectileSpawnPos: {fileID: 304193968}
   hasAttackAnimation: 1
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!54 &112720818
 Rigidbody:
@@ -4739,6 +4745,8 @@ MonoBehaviour:
   projectileSpawnPos: {fileID: 0}
   hasAttackAnimation: 0
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!54 &753400384
 Rigidbody:
@@ -7215,13 +7223,15 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   attackDamage: 3
   attacksPerSecond: 0.5
-  attackRange: 2
+  attackRange: 3
   damageAngle: 39.84936
   attackType: 0
   projectile: {fileID: 0}
   projectileSpawnPos: {fileID: 0}
   hasAttackAnimation: 1
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!114 &1162807540
 MonoBehaviour:
@@ -7266,8 +7276,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6584355, y: 1.8747928, z: 1.8350716}
-  m_Center: {x: -0.07012588, y: 0.90997756, z: 0.41753578}
+  m_Size: {x: 0.94827473, y: 1.8747928, z: 2.5544052}
+  m_Center: {x: -0.045757473, y: 0.90997756, z: 0.057868958}
 --- !u!136 &1162807543
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9040,6 +9050,8 @@ MonoBehaviour:
   projectileSpawnPos: {fileID: 0}
   hasAttackAnimation: 1
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!114 &1693235180
 MonoBehaviour:
@@ -9585,6 +9597,8 @@ MonoBehaviour:
   projectileSpawnPos: {fileID: 1320518949}
   hasAttackAnimation: 0
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!54 &1808766945
 Rigidbody:
@@ -9893,6 +9907,8 @@ MonoBehaviour:
   projectileSpawnPos: {fileID: 0}
   hasAttackAnimation: 0
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!1 &1839613190
 GameObject:
@@ -10439,6 +10455,8 @@ MonoBehaviour:
   projectileSpawnPos: {fileID: 0}
   hasAttackAnimation: 1
   isAttacking: 0
+  cooldown: 0
+  lastAttack: 0
   attackCollision: {fileID: 0}
 --- !u!114 &1898953021
 MonoBehaviour:
@@ -11274,10 +11292,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3771873
+  m_Radius: 0.32188383
   m_Height: 1.9093393
   m_Direction: 1
-  m_Center: {x: 0.041832864, y: 0.8720673, z: 0.050184667}
+  m_Center: {x: -0.01347062, y: 0.8720673, z: 0.050184667}
 --- !u!1 &2076939223
 GameObject:
   m_ObjectHideFlags: 0
