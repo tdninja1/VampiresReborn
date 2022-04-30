@@ -10,14 +10,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Default2
   - Water
   - UI
   - Interactable
   - Post-Processing
   - Player
   - Obstacles
-  - 
+  - Enemy
   - 
   - 
   - 

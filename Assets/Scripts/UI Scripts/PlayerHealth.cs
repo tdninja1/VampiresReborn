@@ -58,7 +58,8 @@ public class PlayerHealth : MonoBehaviour
         //above is the new input system, use the old input system by using inputManager to handle inputs
         if (inputManager.onFoot.Debug.triggered)
         {
-            TakeDamage(Random.Range(5, 10));
+            //TakeDamage(Random.Range(5, 10));
+            ReceiveDamage(Random.Range(5, 10));
         }
 
         if (inputManager.onFoot.Heal.triggered)
@@ -72,16 +73,9 @@ public class PlayerHealth : MonoBehaviour
         // }
 
         if (agent != null && agent.WithinAttackRange()) {
-            // ReceiveDamage(Random.Range(5, 10));
-            TakeDamage(3);
+            ReceiveDamage(Random.Range(5, 10));
+            //TakeDamage(3);
         }
-
-      
-
-        
-       
-       
-        
 
     }
 
@@ -120,33 +114,31 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log(counter);
 
-       
-        
-
     }
 
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        lerpTimer = 0f;
-
-        if (health <= 0) { 
-            SceneManager.LoadScene(3); //lose scene
-            // AudioSource ac = GetComponent<AudioSource>();
-            // ac.PlayOneShot(winSound);
-        }
-    }
-
-    // public void ReceiveDamage(float damage)
+    // public void TakeDamage(float damage)
     // {
     //     health -= damage;
     //     lerpTimer = 0f;
 
-    //     if (health <= 0)
-    //     {
-
+    //     if (health <= 0) { 
+    //         SceneManager.LoadScene(3); //lose scene
+    //         // AudioSource ac = GetComponent<AudioSource>();
+    //         // ac.PlayOneShot(winSound);
     //     }
     // }
+
+    public void ReceiveDamage(float damage)
+    {
+         health -= damage;
+         lerpTimer = 0f;
+
+         if (health <= 0) { 
+            //SceneManager.LoadScene(3); //lose scene
+            // AudioSource ac = GetComponent<AudioSource>();
+            // ac.PlayOneShot(winSound);
+          }
+    }
 
     public void RestoreHealth(float healAmount)
     {

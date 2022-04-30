@@ -1,8 +1,9 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+using CandiceAIforGames.AI;
 public class PlayerMotor : MonoBehaviour
 {
     Animator animator;
@@ -39,6 +40,9 @@ public class PlayerMotor : MonoBehaviour
     public bool CanAttack = true;
     public bool isAttacking = false; //check if player is attacking
     public float AttackCooldown = 4.0f;
+    public float attackDamage = 100.0f;
+
+    public CandiceAIController agent;
 
     //SOUND
     public AudioClip swordAttackSound;
@@ -85,6 +89,8 @@ public class PlayerMotor : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
+
+        
     }
 
     public void ProcessMove(Vector2 input) 
@@ -185,11 +191,33 @@ public class PlayerMotor : MonoBehaviour
         isAttacking = true;
         CanAttack = false;
 
+        //candice damage logic
+        //agent.SendMessage("ReceiveDamage", attackDamage);
+
+        //end candice damage logic
+
         Animator anim = sword.GetComponent<Animator>();
         anim.SetTrigger("Attack");
+
         AudioSource ac = GetComponent<AudioSource>();
         ac.PlayOneShot(swordAttackSound);
         StartCoroutine(ResetAttackCooldown());
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            Debug.Log("Damaged enemy");
+            Animator enemyAnim = sword.GetComponent<Animator>();
+            enemyAnim.SetTrigger("Death");
+
+
+
+            Destroy(other.gameObject, 1.25f);
+            
+        }
+
     }
 
     IEnumerator ResetAttackCooldown()
@@ -197,6 +225,7 @@ public class PlayerMotor : MonoBehaviour
         StartCoroutine(ResetAttackBool());
         yield return new WaitForSeconds(AttackCooldown);
         CanAttack = true;
+        gameObject.SendMessage("ReceiveDamage", attackDamage);
     }
 
     IEnumerator ResetAttackBool()
