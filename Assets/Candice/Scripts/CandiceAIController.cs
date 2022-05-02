@@ -1,4 +1,5 @@
 ﻿
+
 using CandiceAIforGames.AI;
 using CandiceAIforGames.AI.Pathfinding;
 //using CandiceAIforGames.Character;
@@ -131,7 +132,7 @@ namespace CandiceAIforGames.AI
         [SerializeField]
         private Vector3 movePoint;
         [SerializeField]
-        private float moveSpeed = 7f;
+        public float moveSpeed = 7f;
         [SerializeField]
         private float rotationSpeed = 12f;
         [SerializeField]
@@ -178,7 +179,7 @@ namespace CandiceAIforGames.AI
         [SerializeField]
         private GameObject attackTarget;
         [SerializeField]
-        private float attackDamage = 3f;
+        private float attackDamage = 0.003f; //3f is too high
         [SerializeField]
         private float attacksPerSecond = 1f;
         [SerializeField]
@@ -195,20 +196,6 @@ namespace CandiceAIforGames.AI
         private bool hasAttackAnimation = false;
         [SerializeField]
         private bool isAttacking = false;
-
-
-        /*
-        * Animator and time of last attack
-        */
-        Animator anim;
-
-        /*
-        * Cooldown
-        */
-        public float cooldown;
-        public float lastAttack;
-        
-
 
         /*
          * Modules
@@ -276,9 +263,18 @@ namespace CandiceAIforGames.AI
         private InputManager inputManager;
         public AttackCollision attackCollision;
 
+        /*
+        * Animator and time of last attack
+        */
+        Animator anim;
+
+        /*
+        * Cooldown
+        */
+        public float cooldown;
+        public float lastAttack;
+
      
-
-
         #endregion
         // Start is called before the first frame update
         void Start()
@@ -287,6 +283,8 @@ namespace CandiceAIforGames.AI
             candice = FindObjectOfType<CandiceAIManager>();
 
             inputManager = GetComponent<InputManager>();
+            cooldown = 1f;
+            lastAttack = cooldown;
             
             enemyHealthBar = GetComponent<EnemyHealth>();
 
@@ -318,6 +316,7 @@ namespace CandiceAIforGames.AI
         // Update is called once per frame
         void Update()
         {
+            
 
         }
         #region Helper Methods 
@@ -450,10 +449,33 @@ namespace CandiceAIforGames.AI
             }
         }
 
+        // public void OnTriggerEnter(Collider other)
+        // {
+            
+
+        //     if (other.gameObject.tag == "Enemy")
+        //     {
+        //         Debug.Log("Collided with player");
+        //         //isAttacking = false;
+        //     }
+        // }
+
         IEnumerator AttackCoroutine()
         {
             yield return new WaitForSeconds(0.75f);
             
+        }
+
+    
+
+        public void DeathAnim()
+        {
+            anim.SetTrigger("Death");
+        }
+        
+        public void Disappear()
+        {
+            Destroy(gameObject, 3f);
         }
 
         public void AttackMelee()
@@ -463,35 +485,23 @@ namespace CandiceAIforGames.AI
                 //Play attack animation which will call the Damage() function
                 IsAttacking = true;
 
-                anim.SetTrigger("attack");
-
-                //sends damage to player
-                // if (Time.time - lastAttack < cooldown) {
-                //     return;
-                // }
-                // lastAttack = Time.time;
-
-                // if (IsAttacking)
-                // {
-                //     player.SendMessage("ReceiveDamage", 0.08f);
-                // }
-                Collider other = player.GetComponent<Collider>();
+                anim.SetTrigger("attack");                        // Candice A.I. attack animation
+                Collider other = player.GetComponent<Collider>(); //check if colliding with player collider
                 
-
-                
-                if (other.tag == "Player" && anim.tag != "Death")
+                if (other.tag == "Player" && anim.tag == "Death" || anim.tag == "Death2" || anim.tag == "Death3")
                 {
-                    Debug.Log("Damaged player from collision");
-                    
-                    other.GetComponent<PlayerHealth>().ReceiveDamage(0.0035f);
+                    //Debug.Log("Damaged player from collision");
+                    // OnTriggerEnter(other);
+                    // if (col.tag == "Enemy" || col.tag =="Enemy2" || col.tag == "Enemy3" && anim.tag == "Death" || anim.tag == "Death2" || anim.tag == "Death3") {
+                        
+                    //Destroy(gameObject,3f);
 
-                    //player.SendMessage("ReceiveDamage", 0.08f);
+                        
+                    // }
+                     
                 }
-                
-
-                
-                onAttackComplete();
-                
+                onAttackComplete();  //sets IsAttacking to false     
+           
             }
             else if (!IsAttacking)
             {
@@ -499,6 +509,8 @@ namespace CandiceAIforGames.AI
                 StartCoroutine(combatModule.DealTimedDamage(AttackSpeed, AttackDamage, AttackRange, DamageAngle, enemyTags,onAttackComplete));
             }
         }
+
+
         public void onAttackComplete()
         {
             IsAttacking = false;

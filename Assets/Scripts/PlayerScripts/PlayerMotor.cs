@@ -7,6 +7,7 @@ using CandiceAIforGames.AI;
 public class PlayerMotor : MonoBehaviour
 {
     Animator animator;
+    Animator animator2;
     //player controller
     private CharacterController controller;
     //input manager
@@ -36,7 +37,7 @@ public class PlayerMotor : MonoBehaviour
     public int flyTimer = 5;
 
     //Bite attack movement
-    public GameObject sword;
+    public GameObject sword, enemy1, enemy2, enemy3;
     public bool CanAttack = true;
     public bool isAttacking = false; //check if player is attacking
     public float AttackCooldown = 4.0f;
@@ -47,12 +48,17 @@ public class PlayerMotor : MonoBehaviour
     //SOUND
     public AudioClip swordAttackSound;
 
+    Collider col2; 
+    Collider col3;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         inputManager = GetComponent<InputManager>();
+        col2 = GetComponent<Collider>();
+        col3 = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -197,6 +203,7 @@ public class PlayerMotor : MonoBehaviour
         //end candice damage logic
 
         Animator anim = sword.GetComponent<Animator>();
+
         anim.SetTrigger("Attack");
 
         AudioSource ac = GetComponent<AudioSource>();
@@ -206,13 +213,50 @@ public class PlayerMotor : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        Collider col2 = GetComponent<Collider>();
+        Collider col3 = GetComponent<Collider>();
+        
+        enemy1 = other.GetComponent<GameObject>();
+        enemy2 = other.GetComponent<GameObject>();
+        enemy3 = other.GetComponent<GameObject>();
+        // Animator enemyAnim2 = sword.GetComponent<Animator>();
         if (other.tag == "Enemy" && isAttacking == true)
         {
             Debug.Log("Damaged enemy");
             Animator enemyAnim = sword.GetComponent<Animator>();
-            enemyAnim.SetTrigger("Death");
             
+            enemyAnim.SetTrigger("Death");
+            Destroy(enemy1,2f);
         }
+
+        if (col2.tag == "Enemy2" && isAttacking == true)
+        {
+            Debug.Log("Damaged enemy2");
+            animator = enemy1.GetComponent<Animator>();
+
+            EnemyHealth enemy2 = GetComponent<EnemyHealth>();
+            enemy2.ReceiveDamage(100f);
+
+            animator.SetTrigger("Death2");
+            Destroy(enemy2,2f);
+            //enemyAnim2.SetTrigger("Death");
+            //Destroy((this.agent),2f);
+        }
+
+        // if (other.tag == "Enemy3" && isAttacking == true)
+        // {
+        //     Debug.Log("Damaged enemy3");
+        //     Animator enemyAnim3 = sword.GetComponent<Animator>();
+        //     enemyAnim3.SetTrigger("Death3");
+        //     //Destroy((this.agent),2f);
+        // }
+
+
+           /* || other.tag == "Enemy3" || other.tag == "Enemy4"
+            || other.tag == "Enemy5" || other.tag == "Enemy6"
+            || other.tag == "Enemy7" */
+
+        
 
     }
 
@@ -221,7 +265,8 @@ public class PlayerMotor : MonoBehaviour
         StartCoroutine(ResetAttackBool());
         yield return new WaitForSeconds(AttackCooldown);
         CanAttack = true;
-        gameObject.SendMessage("ReceiveDamage", attackDamage);
+        this.gameObject.SendMessage("ReceiveDamage", attackDamage);
+
     }
 
     IEnumerator ResetAttackBool()

@@ -21,7 +21,11 @@ public class AttackDamage : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       health.SendMessage("ReceiveDamage", 3f);
+        // Collider other = player.GetComponent<Collider>();
+        // other.GetComponent<PlayerHealth>().ReceiveDamage(0.0035f);
+        
+        // health.SetHealth(health.health);
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

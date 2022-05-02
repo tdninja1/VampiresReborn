@@ -11,7 +11,7 @@ using CandiceAIforGames.AI.Pathfinding;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private float health;
+    public float health;
     private float lerpTimer; //used to animate the health bar
     public float maxHealth = 100f;
     public float chipSpeed = 2f;
@@ -32,12 +32,48 @@ public class PlayerHealth : MonoBehaviour
     //SOUND
     public AudioClip loseSound;
 
+    public float counterDmgMultiplier = 0.0f;
+
+    /*
+    * Animator and time of last attack
+    */
+    Animator anim;
+
+    /*
+    * Enemy Delay For Damage. Make sure to use tags: Enemy - Enemy6 to each corresponding enemy.
+    */
+    private float hitLast = 0;
+    private float hitDelay = 1.95f;
+
+    private float hitLast2 = 0;
+    private float hitDelay2 = 2.25f;
+
+    private float hitLast3 = 0;
+    private float hitDelay3 = 2.1f;
+
+    private float hitLast4 = 0;
+    private float hitDelay4 = 2f;
+
+    private float hitLast5 = 0;
+    private float hitDelay5 = 1.98f;
+
+    private float hitLast6 = 0;
+    private float hitDelay6 = 1.96f;
+
+    private float hitLast7 = 0;
+    private float hitDelay7 = 2.12f;
+
     
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        counterDmgMultiplier = 0f;
         inputManager = GetComponent<InputManager>();
+
+        //added animation
+        anim = GetComponent<Animator>();
+        //end animation
 
         //added for scrolls
         counter = 0;
@@ -134,16 +170,64 @@ public class PlayerHealth : MonoBehaviour
          lerpTimer = 0f;
 
          if (health <= 0) { 
-            //SceneManager.LoadScene(3); //lose scene
+            SceneManager.LoadScene(3); //lose scene
             // AudioSource ac = GetComponent<AudioSource>();
             // ac.PlayOneShot(winSound);
           }
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger Enter " + other.gameObject);
+        counterDmgMultiplier += 0.5f;
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Trigger Exit " + other.gameObject);
+        counterDmgMultiplier -= 0.5f;
+
+    }
+    public void OnTriggerStay(Collider other)
+        {
+            float damage = 3.2f;
+            Debug.Log("Counter " + counterDmgMultiplier + " damage*counter: " + damage * counterDmgMultiplier); 
+            if (other.gameObject.tag == "Enemy")
+            {
+                if (Time.time - hitLast < hitDelay) return;
+
+                Debug.Log("Enemy Collided with player");
+                ReceiveDamage(damage + counterDmgMultiplier);
+                hitLast = Time.time;
+                //isAttacking = false;
+            }
+
+            // if (other.gameObject.tag == "Enemy2")
+            // {
+            //     if (Time.time - hitLast2 < hitDelay2) return;
+            //     Debug.Log("Enemy2 Collided with player");
+            //     ReceiveDamage(damage);
+            //     hitLast2 = Time.time;
+            //     //isAttacking = false;
+            // }
+        }
+
+        
 
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
         lerpTimer = 0f;
 
+    }
+
+    public void SetHealth(float health)
+    {
+        health = this.health;
+    }
+
+    public void SetMaxHealth(float maxHealth)
+    {
+        maxHealth = this.maxHealth;
     }
 }

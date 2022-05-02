@@ -29,6 +29,16 @@ public class EnemyHealth : MonoBehaviour
     //SOUND
     public AudioClip loseSound;
 
+    Animator anim;
+
+    CandiceAIController agentController;
+
+    public float cooldown = 1f;
+    private float lastAttacked = -9999f;
+
+    private float hitLast = 0;
+    private float hitDelay = 0.95f;
+
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +46,8 @@ public class EnemyHealth : MonoBehaviour
         health = maxHealth;
         inputManager = GetComponent<InputManager>();
         agent = GetComponent<CandiceAIController>();
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -43,7 +55,16 @@ public class EnemyHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth); //ensures value never goes above or below max and min
         UpdateHealthUI();
+
         
+        
+    }
+
+    void Awake()
+    {
+        health = maxHealth;
+        
+        agentController = GetComponent<CandiceAIController>();
     }
 
     public void UpdateHealthUI()
@@ -93,6 +114,33 @@ public class EnemyHealth : MonoBehaviour
     //         // ac.PlayOneShot(winSound);
     //     }
     // }
+    public PlayerMotor pm;
+    public GameObject HitParticle;
+
+    public void OnTriggerEnter(Collider other) {
+        Animator enemyAnim = other.GetComponent<Animator>();
+        float damage = 100f;
+
+        if (other.tag == "Player" && pm.isAttacking) 
+        {
+            
+
+            if (Time.time - hitLast < hitDelay) 
+            {
+                return;
+                
+            }
+            ReceiveDamage(100f);
+            hitLast = Time.time;
+
+            
+            Debug.Log("Player attacking: " + other.name);
+           
+            Instantiate(HitParticle, new Vector3(other.transform.position.x, 
+                transform.position.y, other.transform.position.z), 
+                other.transform.rotation);
+        }
+    }
 
     public void ReceiveDamage(float damage)
     {
@@ -100,6 +148,11 @@ public class EnemyHealth : MonoBehaviour
          lerpTimer = 0f;
 
          if (health <= 0) { 
+            agentController.moveSpeed = 0;
+            agentController.onAttackComplete();
+            agentController.DeathAnim();
+            agentController.Disappear();
+            
             // AudioSource ac = GetComponent<AudioSource>();
             // ac.PlayOneShot(winSound);
             
