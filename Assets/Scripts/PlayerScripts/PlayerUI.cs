@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class PlayerUI : MonoBehaviour
     public void UpdateText(string promptMessage)
     {
         promptText.text = promptMessage;
+        //Debug.Log("PlayerUI: promptText: " + promptMessage);
     }
 
 

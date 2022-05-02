@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
     private RaycastHit rayHit;
 
     //SOUND
-    public AudioClip loseSound;
+    public AudioClip loseSceneSound;
 
     public float counterDmgMultiplier = 0.0f;
 
@@ -103,14 +103,9 @@ public class PlayerHealth : MonoBehaviour
             RestoreHealth(Random.Range(5, 10));
         }
 
-        // if (inputManager.onFoot.Interact.triggered && CollectCube == null) {
-        //     UpdateScrollsUI();
+        if (inputManager.onFoot.Interact.triggered && CollectCube == null) {
+            UpdateScrollsUI();
             
-        // }
-
-        if (agent != null && agent.WithinAttackRange()) {
-            ReceiveDamage(Random.Range(5, 10));
-            //TakeDamage(3);
         }
 
     }
@@ -152,17 +147,17 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    // public void TakeDamage(float damage)
-    // {
-    //     health -= damage;
-    //     lerpTimer = 0f;
+    public void LoseAudio()
+    {
+        AudioSource ac = GetComponent<AudioSource>();
 
-    //     if (health <= 0) { 
-    //         SceneManager.LoadScene(3); //lose scene
-    //         // AudioSource ac = GetComponent<AudioSource>();
-    //         // ac.PlayOneShot(winSound);
-    //     }
-    // }
+        if (ac.isPlaying)
+            {
+                return;
+            } else {
+                ac.PlayOneShot(loseSceneSound);
+            }
+    }
 
     public void ReceiveDamage(float damage)
     {
@@ -170,9 +165,14 @@ public class PlayerHealth : MonoBehaviour
          lerpTimer = 0f;
 
          if (health <= 0) { 
-            SceneManager.LoadScene(3); //lose scene
-            // AudioSource ac = GetComponent<AudioSource>();
-            // ac.PlayOneShot(winSound);
+            SceneManager.LoadScene(4); //lose scene
+
+
+            //
+            
+            
+            
+
           }
     }
 
@@ -189,28 +189,20 @@ public class PlayerHealth : MonoBehaviour
 
     }
     public void OnTriggerStay(Collider other)
+    {
+        float damage = 3.2f;
+        Debug.Log("Counter " + counterDmgMultiplier + " damage*counter: " + damage * counterDmgMultiplier); 
+        if (other.gameObject.tag == "Enemy")
         {
-            float damage = 3.2f;
-            Debug.Log("Counter " + counterDmgMultiplier + " damage*counter: " + damage * counterDmgMultiplier); 
-            if (other.gameObject.tag == "Enemy")
-            {
-                if (Time.time - hitLast < hitDelay) return;
+            if (Time.time - hitLast < hitDelay) return;
 
-                Debug.Log("Enemy Collided with player");
-                ReceiveDamage(damage + counterDmgMultiplier);
-                hitLast = Time.time;
-                //isAttacking = false;
-            }
-
-            // if (other.gameObject.tag == "Enemy2")
-            // {
-            //     if (Time.time - hitLast2 < hitDelay2) return;
-            //     Debug.Log("Enemy2 Collided with player");
-            //     ReceiveDamage(damage);
-            //     hitLast2 = Time.time;
-            //     //isAttacking = false;
-            // }
+            Debug.Log("Enemy Collided with player");
+            ReceiveDamage(damage + counterDmgMultiplier);
+            hitLast = Time.time;
+                
         }
+
+    }
 
         
 

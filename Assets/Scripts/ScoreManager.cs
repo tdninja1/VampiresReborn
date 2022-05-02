@@ -11,6 +11,9 @@ public class ScoreManager : MonoBehaviour
     public GameObject collectCube;
     private InputManager inputManager;
 
+    //SOUND
+    public AudioClip scrollCollectedSound;
+
     int score = 0;
     // Start is called before the first frame update
 
@@ -28,6 +31,21 @@ public class ScoreManager : MonoBehaviour
     {
         score += 1;
         scrollText.text = score.ToString();
+
+        CollectAudio(); //WORKS
+          
+    }
+
+    public void CollectAudio()
+    {
+        AudioSource ac = GetComponent<AudioSource>();
+
+        if (ac.isPlaying)
+            {
+                return;
+            } else {
+                ac.PlayOneShot(scrollCollectedSound);
+            }
     }
 
 }

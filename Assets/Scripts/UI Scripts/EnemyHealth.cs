@@ -27,17 +27,23 @@ public class EnemyHealth : MonoBehaviour
     private RaycastHit rayHit;
 
     //SOUND
-    public AudioClip loseSound;
+    public AudioClip deathSound;
 
     Animator anim;
 
-    CandiceAIController agentController;
+    CandiceAIController agentController; //candice ai controller
 
     public float cooldown = 1f;
     private float lastAttacked = -9999f;
 
     private float hitLast = 0;
     private float hitDelay = 0.95f;
+
+    private float soundLast = 0;
+    private float soundDelay = 2.8f;
+
+    public PlayerMotor pm;
+    public GameObject HitParticle;
 
     
     // Start is called before the first frame update
@@ -114,8 +120,7 @@ public class EnemyHealth : MonoBehaviour
     //         // ac.PlayOneShot(winSound);
     //     }
     // }
-    public PlayerMotor pm;
-    public GameObject HitParticle;
+    
 
     public void OnTriggerEnter(Collider other) {
         Animator enemyAnim = other.GetComponent<Animator>();
@@ -153,8 +158,20 @@ public class EnemyHealth : MonoBehaviour
             agentController.DeathAnim();
             agentController.Disappear();
             
-            // AudioSource ac = GetComponent<AudioSource>();
-            // ac.PlayOneShot(winSound);
+            AudioSource ac = GetComponent<AudioSource>();
+            if (ac.isPlaying)
+            {
+                return;
+            } else {
+                if (Time.time - soundLast < soundDelay) 
+                {
+                    return;
+                }
+                ac.PlayOneShot(deathSound);
+                Debug.Log("ac: " + ac.isPlaying);
+                soundLast = Time.time;
+            }
+            
             
           }
     }
