@@ -104,10 +104,8 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if (inputManager.onFoot.Interact.triggered && CollectCube == null) {
-            UpdateScrollsUI();
-            
+            UpdateScrollsUI();        
         }
-
     }
 
     public void UpdateHealthUI()
@@ -147,6 +145,13 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
+    IEnumerator WaitForLoseSnd()
+    {
+        yield return new WaitForSeconds(0.38f);
+        LoseAudio();
+
+    }
+
     public void LoseAudio()
     {
         AudioSource ac = GetComponent<AudioSource>();
@@ -163,8 +168,11 @@ public class PlayerHealth : MonoBehaviour
     {
          health -= damage;
          lerpTimer = 0f;
+         
+         StartCoroutine(WaitForLoseSnd());
 
          if (health <= 0) { 
+            Debug.Log("Scene loaded since health was less than or equal to zero");
             SceneManager.LoadScene(4); //lose scene
 
 

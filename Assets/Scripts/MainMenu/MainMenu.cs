@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public AudioClip menuClickSnd;
     
     public void PlayGame()
     {
@@ -25,5 +26,17 @@ public class MainMenu : MonoBehaviour
     public void GoToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ClickSound()
+    {
+        AudioSource ac = GetComponent<AudioSource>();
+
+        if (ac.isPlaying)
+            {
+                return;
+            } else {
+                ac.PlayOneShot(menuClickSnd);
+            }
     }
 }
