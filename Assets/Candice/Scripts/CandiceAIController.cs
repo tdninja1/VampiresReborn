@@ -528,6 +528,20 @@ namespace CandiceAIforGames.AI
                 StartCoroutine(combatModule.FireProjectile(AttackTarget,Projectile,ProjectileSpawnPos.position,AttackSpeed,onAttackComplete));
             }
         }
+
+        IEnumerator StartSleepingAnimation()
+        {
+            anim.SetTrigger("Death");
+            yield return new WaitForSeconds(10);
+        }
+
+        public void Sleep()
+        {
+            moveSpeed = 0f;
+            //StartCoroutine to tell the ai to wake up and start seeking player
+            StartCoroutine(StartSleepingAnimation());
+        }
+
         public void Wander()
         {
             /* Does nothing except pick a new destination to go to

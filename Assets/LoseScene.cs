@@ -8,7 +8,11 @@ public class LoseScene : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {   
-        Debug.Log("LoseScene: OnTriggerEnter: "  + other.name);
-        SceneManager.LoadScene(4); //lose scene
+        if (other.tag == "Player")
+        {
+            Debug.Log("LoseScene: OnTriggerEnter: "  + other.name);
+            SceneManager.LoadScene(4); //lose scene
+        }
+        
     }
 }

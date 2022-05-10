@@ -8,6 +8,7 @@ TagManager:
   - Obstacles
   - Enemy2
   - Enemy3
+  - CandiceTile
   layers:
   - Default
   - TransparentFX

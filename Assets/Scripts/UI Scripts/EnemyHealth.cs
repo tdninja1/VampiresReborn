@@ -71,11 +71,13 @@ public class EnemyHealth : MonoBehaviour
         health = maxHealth;
         
         agentController = GetComponent<CandiceAIController>();
+
+        
     }
 
     public void UpdateHealthUI()
     {
-        Debug.Log(health);
+        //Debug.Log(health);
 
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;

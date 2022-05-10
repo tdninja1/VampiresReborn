@@ -40,6 +40,9 @@ public class InputManager : MonoBehaviour
 
         //Bite uses callback context when performed
         onFoot.Bite.performed += ctx => motor.Bite();
+
+        //Passive uses callback context when performed
+        onFoot.Passive.performed += ctx => motor.Passive();
     
     }
 

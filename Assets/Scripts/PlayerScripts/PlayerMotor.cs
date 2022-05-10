@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using CandiceAIforGames.AI;
+using UnityEngine.SceneManagement;
+
 public class PlayerMotor : MonoBehaviour
 {
     Animator animator;
@@ -40,6 +42,9 @@ public class PlayerMotor : MonoBehaviour
     public GameObject sword, enemy1, enemy2, enemy3;
     public bool CanAttack = true;
     public bool isAttacking = false; //check if player is attacking
+    public bool isPassive = false; //check if player is passive
+    public bool inCombat = false;
+
     public float AttackCooldown = 4.0f;
     public float attackDamage = 100.0f;
 
@@ -59,6 +64,8 @@ public class PlayerMotor : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         col2 = GetComponent<Collider>();
         col3 = GetComponent<Collider>();
+
+        agent = GetComponent<CandiceAIController>();
     }
 
     // Update is called once per frame
@@ -192,10 +199,41 @@ public class PlayerMotor : MonoBehaviour
         
     // }
 
+    public void Passive()
+    {
+        Collider other = GetComponent<Collider>();
+
+        if (other.tag == "Enemy")
+        {
+            agent.moveSpeed = 0f;
+        }
+        
+        Debug.Log("Passive Click: " + agent.name);
+        //Make enemy passive so it is possible to bite them
+        //Play passive animation
+
+        // AudioSource ac = GetComponent<AudioSource>();
+        // ac.PlayOneShot(swordAttackSound);
+
+        StartCoroutine(ResetPassiveCooldown());
+
+        // if (col2.tag == "Enemy")
+        // {
+        //     //this.agent.Sleep();
+
+        //     this.gameObject.SendMessage("Sleep");
+
+        // }
+        
+
+    }
+
     public void Bite()
     {
         isAttacking = true;
         CanAttack = false;
+        
+        
 
         //candice damage logic
         //agent.SendMessage("ReceiveDamage", attackDamage);
@@ -222,6 +260,7 @@ public class PlayerMotor : MonoBehaviour
         // Animator enemyAnim2 = sword.GetComponent<Animator>();
         if (other.tag == "Enemy" && isAttacking == true)
         {
+            inCombat = true;
             Debug.Log("Damaged enemy");
             Animator enemyAnim = sword.GetComponent<Animator>();
             
@@ -231,6 +270,8 @@ public class PlayerMotor : MonoBehaviour
 
         if (col2.tag == "Enemy2" && isAttacking == true)
         {
+            inCombat = true;
+
             Debug.Log("Damaged enemy2");
             animator = enemy1.GetComponent<Animator>();
 
@@ -241,6 +282,15 @@ public class PlayerMotor : MonoBehaviour
             Destroy(enemy2,2f);
             //enemyAnim2.SetTrigger("Death");
             //Destroy((this.agent),2f);
+        }
+
+        //Passive attack
+        if (other.tag == "Enemy" && isPassive == true)
+        {
+
+            Animator enemyAnim = sword.GetComponent<Animator>();
+            enemyAnim.SetTrigger("Death");
+            Debug.Log("Passive Attack Playing: ");
         }
 
         // if (other.tag == "Enemy3" && isAttacking == true)
@@ -260,9 +310,20 @@ public class PlayerMotor : MonoBehaviour
 
     }
 
+    IEnumerator ResetPassiveCooldown()
+    {
+        
+
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(ResetPassiveBool());
+        
+    }
+
     IEnumerator ResetAttackCooldown()
     {
         StartCoroutine(ResetAttackBool());
+        StartCoroutine(ResetCombatCooldown());
+
         yield return new WaitForSeconds(AttackCooldown);
         CanAttack = true;
         this.gameObject.SendMessage("ReceiveDamage", attackDamage);
@@ -273,6 +334,23 @@ public class PlayerMotor : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         isAttacking = false;
+    }
+
+    IEnumerator ResetPassiveBool()
+    {
+        yield return new WaitForSeconds(1.0f);
+        isPassive = false;
+    }
+
+    IEnumerator ResetCombatCooldown()
+    {
+        yield return new WaitForSeconds(5f);
+        inCombat = false;
+    }
+
+    public void LoadDeath()
+    {
+        SceneManager.LoadScene(4); //lose scene
     }
 
 }

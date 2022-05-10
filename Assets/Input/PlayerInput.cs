@@ -116,6 +116,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Passive"",
+                    ""type"": ""Button"",
+                    ""id"": ""8bf53603-9502-428c-bc5a-0ae322480217"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -402,6 +411,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4e13c3f-f8eb-4a25-a2ea-2369088b7795"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Passive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -938,6 +958,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Fly = m_OnFoot.FindAction("Fly", throwIfNotFound: true);
         m_OnFoot_Debug = m_OnFoot.FindAction("Debug", throwIfNotFound: true);
         m_OnFoot_Heal = m_OnFoot.FindAction("Heal", throwIfNotFound: true);
+        m_OnFoot_Passive = m_OnFoot.FindAction("Passive", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1019,6 +1040,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Fly;
     private readonly InputAction m_OnFoot_Debug;
     private readonly InputAction m_OnFoot_Heal;
+    private readonly InputAction m_OnFoot_Passive;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -1033,6 +1055,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Fly => m_Wrapper.m_OnFoot_Fly;
         public InputAction @Debug => m_Wrapper.m_OnFoot_Debug;
         public InputAction @Heal => m_Wrapper.m_OnFoot_Heal;
+        public InputAction @Passive => m_Wrapper.m_OnFoot_Passive;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1072,6 +1095,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Heal.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnHeal;
                 @Heal.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnHeal;
                 @Heal.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnHeal;
+                @Passive.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnPassive;
+                @Passive.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnPassive;
+                @Passive.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnPassive;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -1106,6 +1132,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Heal.started += instance.OnHeal;
                 @Heal.performed += instance.OnHeal;
                 @Heal.canceled += instance.OnHeal;
+                @Passive.started += instance.OnPassive;
+                @Passive.performed += instance.OnPassive;
+                @Passive.canceled += instance.OnPassive;
             }
         }
     }
@@ -1227,6 +1256,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnFly(InputAction.CallbackContext context);
         void OnDebug(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
+        void OnPassive(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
